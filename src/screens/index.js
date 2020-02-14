@@ -16,16 +16,28 @@ import {
   ResponsiveEmbed,
   Dropdown
 } from "react-bootstrap";
+import { SocialIcon } from "react-social-icons";
 import ReactPlayer from "react-player";
 import Slider from "react-slideview";
+import ReactSlider from "react-slider";
+
+import SpecialOffers from "../components/specialOffers";
+import ContinuousSlider from "../components/continuousSlider";
 
 import ReactDOM from "react-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTwitter, faFacebookF, faLinkedInIn, faPinterest, faInstagram } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTwitter,
+  faFacebookF,
+  faLinkedInIn,
+  faPinterest,
+  faInstagram
+} from "@fortawesome/free-solid-svg-icons";
 
 import img from "../assets/homepage-desktop.jpeg";
 import backgroundPhone from "../assets/hero_img_lrg-2.png";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/logo.gif";
 // const bg = require("./assets/homepage-desktop.jpeg");
 
 const style = {
@@ -57,20 +69,19 @@ const style = {
   }
 };
 class HomePage extends Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       scrolling: false
-    }
+    };
   }
 
-  componentDidMount(){
-    document.addEventListener('scroll', (event)=> {
+  componentDidMount() {
+    document.addEventListener("scroll", event => {
       this.setState({
         scrolling: true
-      })
-    })
+      });
+    });
   }
   render() {
     // var imgSrc = './image/image1.jpg';
@@ -105,7 +116,7 @@ class HomePage extends Component {
           {comps[i + 1]}
         </Row>
       );
-      console.log('finished');
+      console.log("finished");
     }
     return (
       <div style={style.body}>
@@ -113,19 +124,70 @@ class HomePage extends Component {
           bg="*"
           expand="lg"
           fixed="top"
-          style={{ backgroundColor: ((!this.state.scrolling) ? ("rgba(255, 255, 255, 0.15)"): ("rgb(255, 255, 255)")), color: '#766f9b'}}
+          style={{
+            backgroundColor: !this.state.scrolling
+              ? "rgba(255, 255, 255, 0.15)"
+              : "rgb(255, 255, 255)",
+            color: "#766f9b"
+          }}
         >
           <Navbar.Brand href="#home">
-            <Image src={logo} thumbnail width="50"></Image>
+            <Image src={logo} thumbnail width="100"></Image>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link style={{ color: '#766f9b', fontSize: '16px', fontWeight: 'bold' }} href="#home">Home</Nav.Link>
-              <Nav.Link style={{ color: '#766f9b', fontSize: '16px', fontWeight: 'bold' }} href="#link">Calculators</Nav.Link>
-              <Nav.Link style={{ color: '#766f9b', fontSize: '16px', fontWeight: 'bold' }} href="#link">About Us</Nav.Link>
-              <Nav.Link style={{ color: '#766f9b', fontSize: '16px', fontWeight: 'bold' }} href="#link">Contact Us</Nav.Link>
-              <NavDropdown style={{ color: '#766f9b', fontSize: '16px', fontWeight: 'bold' }} title="Special Offers" id="basic-nav-dropdown">
+              <Nav.Link
+                style={{
+                  color: "#766f9b",
+                  fontSize: "16px",
+                  fontWeight: "bold"
+                }}
+                href="#home"
+              >
+                First Home Buyers
+              </Nav.Link>
+              <Nav.Link
+                style={{
+                  color: "#766f9b",
+                  fontSize: "16px",
+                  fontWeight: "bold"
+                }}
+                href="#link"
+              >
+                Refinancing Home Loans
+              </Nav.Link>
+              <Nav.Link
+                style={{
+                  color: "#766f9b",
+                  fontSize: "16px",
+                  fontWeight: "bold"
+                }}
+                href="#link"
+              >
+                Debt Consolidation
+              </Nav.Link>
+              <Nav.Link
+                style={{
+                  color: "#766f9b",
+                  fontSize: "16px",
+                  fontWeight: "bold"
+                }}
+                href="#link"
+              >
+                Calculators
+              </Nav.Link>
+              <Nav.Link
+                style={{
+                  color: "#766f9b",
+                  fontSize: "16px",
+                  fontWeight: "bold"
+                }}
+                href="#link"
+              >
+                About Us
+              </Nav.Link>
+              {/* <NavDropdown style={{ color: '#766f9b', fontSize: '16px', fontWeight: 'bold' }} title="Special Offers" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Another action
@@ -137,7 +199,7 @@ class HomePage extends Component {
                 <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
             <Form inline>
               {/* <FormControl
@@ -145,13 +207,23 @@ class HomePage extends Component {
                 placeholder="Search"
                 className="mr-sm-2"
               /> */}
-              <Button variant="outline-success" style={{ borderRadius: '30px', marginRight: '10px'}}>Connect To an Expert</Button>
-              
-              <Button variant="outline-success" style={{ borderRadius: '30px' }}>Search</Button>
+              <Button
+                variant="outline-success"
+                style={{ borderRadius: "30px", marginRight: "10px" }}
+              >
+                Engage with an expert
+              </Button>
+
+              <Button
+                variant="outline-success"
+                style={{ borderRadius: "30px" }}
+              >
+                Log In / Sign Up
+              </Button>
             </Form>
           </Navbar.Collapse>
         </Navbar>
-
+        <SpecialOffers />
         <div>
           <Jumbotron
             fluid
@@ -738,57 +810,349 @@ class HomePage extends Component {
                 </p>
               </Col>
             </Row>
-            <Row style={{ backgroundColor: '#fff', paddingTop: '20px', paddingBottom: '20px', filter: 'grayscale(100%)', height: '100%'}}>
-              <Col sm={{ span: 10, offset: 1 }}>
-                <Slider>{comps2.map(e => e)}</Slider>
+            <ContinuousSlider />
+            <Row
+              style={{
+                backgroundColor: "#fff",
+                paddingTop: "30px",
+                paddingBottom: "20px",
+                marginBottom: "-100px"
+              }}
+            >
+              <Col sm={12} style={{ marginBottom: "50px" }}>
+                <Dropdown.Divider />
               </Col>
-            </Row>
-            {/* <Dropdown.Divider/> */}
-            <Row style={{ backgroundColor: '#fff', paddingTop: '30px', paddingBottom: '20px', marginBottom: '-100px'}}>
-              <Col sm={12} style={{ marginBottom: '50px' }}>
-                <Dropdown.Divider/>
+              <Col sm={2} style={{ lineHeight: "80%", fontWeight: "bold" }}>
+                <h3
+                  style={{
+                    color: "#1bb580",
+                    fontSize: "12px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    textTransform: "uppercase"
+                  }}
+                >
+                  PRODUCTS
+                </h3>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  First Home Buyer
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Buying Your Next Home
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Re Financing
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Investment Loans
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Business Loans
+                </p>
               </Col>
-              <Col sm={2} style={{ lineHeight: '80%', fontWeight: 'bold' }}>
-                <h3 style={{ color: '#1bb580', fontSize: '12px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase' }}>PRODUCTS</h3>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>First Home Buyer</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Buying Your Next Home</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Re Financing</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Investment Loans</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Business Loans</p>
+              <Col sm={3} style={{ lineHeight: "80%", fontWeight: "bold" }}>
+                <h3
+                  style={{
+                    color: "#1bb580",
+                    fontSize: "12px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    textTransform: "uppercase"
+                  }}
+                >
+                  CALCULATORS
+                </h3>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Personal loan calculator
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Mortgage calculator
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Tax calculator
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Car Loan
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Savings Calculator
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Repayments Calculator
+                </p>
               </Col>
-              <Col sm={3} style={{ lineHeight: '80%', fontWeight: 'bold' }}>
-                <h3 style={{ color: '#1bb580', fontSize: '12px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase' }}>CALCULATORS</h3>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Personal loan calculator</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Mortgage calculator</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Tax calculator</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Car Loan</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Savings Calculator</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Repayments Calculator</p>
+              <Col sm={2} style={{ lineHeight: "80%", fontWeight: "bold" }}>
+                <h3
+                  style={{
+                    color: "#1bb580",
+                    fontSize: "12px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    textTransform: "uppercase"
+                  }}
+                >
+                  COMPANY
+                </h3>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Blog
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  About Us
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Values
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Careers
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Employers
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Partner Sign Up
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Press
+                </p>
               </Col>
-              <Col sm={2} style={{ lineHeight: '80%', fontWeight: 'bold' }}>
-                <h3 style={{ color: '#1bb580', fontSize: '12px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase' }}>COMPANY</h3>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Blog</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>About Us</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Values</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Careers</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Employers</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Partner Sign Up</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Press</p>
+              <Col sm={2} style={{ lineHeight: "80%", fontWeight: "bold" }}>
+                <h3
+                  style={{
+                    color: "#1bb580",
+                    fontSize: "12px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    textTransform: "uppercase"
+                  }}
+                >
+                  LEGAL
+                </h3>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Privacy & Security
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Terms of Service
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Referral Terms
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Lending Licenses
+                </p>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease"
+                  }}
+                >
+                  Disclaimers
+                </p>
               </Col>
-              <Col sm={2} style={{ lineHeight: '80%', fontWeight: 'bold' }}>
-                <h3 style={{ color: '#1bb580', fontSize: '12px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase' }}>LEGAL</h3>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Privacy & Security</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Terms of Service</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Referral Terms</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Lending Licenses</p>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease' }}>Disclaimers</p>
-              </Col>
-              <Col sm={3} style={{ lineHeight: '80%', fontWeight: 'bold', textAlign: 'right'}}>
-                <h3 style={{ color: '#1bb580', fontSize: '12px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase' , paddingRight: '10px'}}>View the new guide</h3>
-                <h3 style={{ color: '#000', fontSize: '24px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase' , paddingRight: '10px'}}>Falconas Guide to Refinancing</h3>
-                <p style={{ color: '#9c9ea1', fontSize: '12px', transition: 'color 250ms ease', paddingRight: '10px'}}>- The Falconas Team</p>
-                <h3 style={{ color: '#1bb580', fontSize: '24px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase' }}>
-                {/* <FontAwesomeIcon icon={faTwitter} />
+              <Col
+                sm={3}
+                style={{
+                  lineHeight: "80%",
+                  fontWeight: "bold",
+                  textAlign: "right"
+                }}
+              >
+                <h3
+                  style={{
+                    color: "#1bb580",
+                    fontSize: "12px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    textTransform: "uppercase",
+                    paddingRight: "10px"
+                  }}
+                >
+                  View the new guide
+                </h3>
+                <h3
+                  style={{
+                    color: "#000",
+                    fontSize: "24px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    textTransform: "uppercase",
+                    paddingRight: "10px"
+                  }}
+                >
+                  Falconas Guide to Refinancing
+                </h3>
+                <p
+                  style={{
+                    color: "#9c9ea1",
+                    fontSize: "12px",
+                    transition: "color 250ms ease",
+                    paddingRight: "10px"
+                  }}
+                >
+                  - The Falconas Team
+                </p>
+                <h3
+                  style={{
+                    color: "#1bb580",
+                    fontSize: "24px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    textTransform: "uppercase"
+                  }}
+                >
+                  <SocialIcon
+                    style={{ marginLeft: "10px" }}
+                    url="http://linkedin.com/"
+                    network="linkedin"
+                  />
+                  <SocialIcon
+                    style={{ marginLeft: "10px" }}
+                    url="https://twitter.com/"
+                    network="twitter"
+                  />
+                  <SocialIcon
+                    style={{ marginLeft: "10px" }}
+                    url="https://facebook.com/"
+                    network="facebook"
+                  />
+                  <SocialIcon
+                    style={{ marginLeft: "10px" }}
+                    url="https://youtube.com/"
+                    network="youtube"
+                  />
+                  {/* <FontAwesomeIcon icon={faTwitter} />
                 <FontAwesomeIcon icon={faFacebookF} />
                 <FontAwesomeIcon icon={faLinkedInIn} />
                 <FontAwesomeIcon icon={faInstagram} />
